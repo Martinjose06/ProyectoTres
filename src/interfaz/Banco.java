@@ -104,11 +104,13 @@ public class Banco extends javax.swing.JFrame {
     private void cmdCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCalcularActionPerformed
 
         String r;
-        double m,t;
+        double m, t, d;
         
         m = Double.parseDouble(txtM.getText());
         
-        t = m * 1.015;
+        d = m * 0.015;
+        
+        t = m - d;
         
         r = String.valueOf(t);
         
@@ -127,11 +129,14 @@ public class Banco extends javax.swing.JFrame {
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
         
         String r;
-        double m,t;
+        double m, t, d;
         
         m = Double.parseDouble(txtM.getText());
         
-        t = m * 1.015;
+        d = m * 0.015;
+        
+        t = m - d;
+
         
         r = String.valueOf(t);
         

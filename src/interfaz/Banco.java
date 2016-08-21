@@ -117,7 +117,7 @@ public class Banco extends javax.swing.JFrame {
 
             r = String.valueOf(t);
 
-            lblS.setText(r);
+            lblS.setText("$ " + r);
         }
     }//GEN-LAST:event_cmdCalcularActionPerformed
 
@@ -151,7 +151,7 @@ public class Banco extends javax.swing.JFrame {
 
                 r = String.valueOf(t);
 
-                lblS.setText(r);
+                lblS.setText("$ " + r);
             }
         }
     }//GEN-LAST:event_txtMKeyPressed

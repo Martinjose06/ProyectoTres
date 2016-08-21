@@ -6,6 +6,7 @@
 package interfaz;
 
 import java.awt.event.KeyEvent;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -55,14 +56,12 @@ public class Banco extends javax.swing.JFrame {
         jLabel2.setText("Monto Ahorrado");
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
 
-        txtM.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtMActionPerformed(evt);
-            }
-        });
         txtM.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtMKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtMKeyTyped(evt);
             }
         });
         jPanel2.add(txtM, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, 80, -1));
@@ -97,24 +96,29 @@ public class Banco extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtMActionPerformed
-
     private void cmdCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCalcularActionPerformed
 
-        String r;
-        double m, t, d;
-        
-        m = Double.parseDouble(txtM.getText());
-        
-        d = m * 0.015;
-        
-        t = m - d;
-        
-        r = String.valueOf(t);
-        
-        lblS.setText(r);
+        if (txtM.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No Ingresó El Monto Ahorrado", "ERROR", JOptionPane.ERROR_MESSAGE);
+            txtM.requestFocusInWindow();
+        } else if (txtM.getText().equalsIgnoreCase("0")) {
+            JOptionPane.showMessageDialog(this, "Ingrese Un Monto Superior a 0", "ERROR", JOptionPane.ERROR_MESSAGE);
+            txtM.selectAll();
+            txtM.requestFocusInWindow();
+        } else {
+            String r;
+            double m, t, d;
+
+            m = Double.parseDouble(txtM.getText());
+
+            d = m * 0.015;
+
+            t = m - d;
+
+            r = String.valueOf(t);
+
+            lblS.setText(r);
+        }
     }//GEN-LAST:event_cmdCalcularActionPerformed
 
     private void cmdRestaurarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdRestaurarActionPerformed
@@ -127,24 +131,39 @@ public class Banco extends javax.swing.JFrame {
     private void txtMKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMKeyPressed
 
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-        
-        String r;
-        double m, t, d;
-        
-        m = Double.parseDouble(txtM.getText());
-        
-        d = m * 0.015;
-        
-        t = m - d;
 
-        
-        r = String.valueOf(t);
-        
-        lblS.setText(r);
-            
+            if (txtM.getText().trim().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "No Ingresó El Monto Ahorrado", "ERROR", JOptionPane.ERROR_MESSAGE);
+                txtM.requestFocusInWindow();
+            } else if (txtM.getText().equalsIgnoreCase("0")) {
+                JOptionPane.showMessageDialog(this, "Ingrese Un Monto Superior a 0", "ERROR", JOptionPane.ERROR_MESSAGE);
+                txtM.selectAll();
+                txtM.requestFocusInWindow();
+            } else {
+                String r;
+                double m, t, d;
+
+                m = Double.parseDouble(txtM.getText());
+
+                d = m * 0.015;
+
+                t = m - d;
+
+                r = String.valueOf(t);
+
+                lblS.setText(r);
+            }
         }
-        
     }//GEN-LAST:event_txtMKeyPressed
+
+    private void txtMKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMKeyTyped
+        char c = evt.getKeyChar();
+
+        if (!Character.isDigit(c)) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtMKeyTyped
 
     /**
      * @param args the command line arguments
